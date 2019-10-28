@@ -1,0 +1,6 @@
+<aspectj>
+    <!--<weaver options="-verbose ">-->
+    <weaver options="-warn:none -Xlint:ignore">
+        <include within="example..*"/>
+    </weaver>
+</aspectj>
