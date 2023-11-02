@@ -1,27 +1,22 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'java'
+    id 'org.springframework.boot' version '2.7.17'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
-apply plugin: 'java'
-apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.4'
-    implementation group: 'org.testng', name: 'testng', version: '7.0.0'
+    implementation 'org.aspectj:aspectjweaver'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
     implementation 'org.springframework:spring-aspects'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
-    useTestNG() {
-        useDefaultListeners = false
-        testName "UnitTest"
-        suiteName "UnitTestSuite"
-    }
+    useJUnitPlatform()
     configurations.implementation.setCanBeResolved(true)
     File springAgent = configurations.implementation.filter { f -> f.name.matches("aspectjweaver.*\\.jar") }.iterator().next();
     if (!springAgent.exists())
